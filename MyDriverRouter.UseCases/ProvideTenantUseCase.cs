@@ -3,15 +3,16 @@
 // All the code in this file is included in all platforms.
 public class ProvideTenantUseCase : IProvideTenantUseCase
 {
-    private readonly IProvideTenantRepository provideTenantRepository;
+    private readonly ISettingsRepository settingsRepository;
 
-    public ProvideTenantUseCase(IProvideTenantRepository provideTenantRepository)
+    public ProvideTenantUseCase(ISettingsRepository settingsRepository)
     {
-        this.provideTenantRepository = provideTenantRepository;
+        this.settingsRepository = settingsRepository;
     }
 
-    public async Task ExecuteAsync(string tenant)
+    public async Task<IEnumerable<string>> ExecuteAsync(string tenant)
     {
-        await this.provideTenantRepository.SetTenant(tenant);
+        await this.settingsRepository.SetTenant(tenant);
+        return await this.settingsRepository.GetLanguagesAvaliebles(tenant);
     }
 }

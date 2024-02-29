@@ -3,5 +3,5 @@
 
 public interface IProvideTenantUseCase
 {
-    Task ExecuteAsync(string tenant);
+    Task<IEnumerable<string>> ExecuteAsync(string tenant);
 }
