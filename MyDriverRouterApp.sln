@@ -9,13 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDriverRouter.CoreBusiness
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDriverRouter.UseCases", "MyDriverRouter.UseCases\MyDriverRouter.UseCases.csproj", "{0C6D410C-CD41-42DA-9CB6-61D8385E840C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{6E48D652-C786-48C7-82B9-4FB20EA9754E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDriverRouter.Plugins.DataStore.InMemory", "Plugins\MyDriverRouter.Plugins.DataStore.InMemory\MyDriverRouter.Plugins.DataStore.InMemory.csproj", "{6D4FD481-02C7-4F87-9FD2-6B9299D7FAA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A3D3D593-1D07-4A7B-9851-51BA173FEF50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -30,5 +31,15 @@ Global
 		{0C6D410C-CD41-42DA-9CB6-61D8385E840C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C6D410C-CD41-42DA-9CB6-61D8385E840C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C6D410C-CD41-42DA-9CB6-61D8385E840C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D4FD481-02C7-4F87-9FD2-6B9299D7FAA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D4FD481-02C7-4F87-9FD2-6B9299D7FAA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D4FD481-02C7-4F87-9FD2-6B9299D7FAA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D4FD481-02C7-4F87-9FD2-6B9299D7FAA0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6D4FD481-02C7-4F87-9FD2-6B9299D7FAA0} = {6E48D652-C786-48C7-82B9-4FB20EA9754E}
 	EndGlobalSection
 EndGlobal
