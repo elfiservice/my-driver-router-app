@@ -3,5 +3,6 @@
 public interface ISettingsRepository
 {
     Task SetTenant(string tenant);
-    Task<IEnumerable<string>> GetLanguagesAvaliebles(string tenant); 
+    Task<string> GetTenant();
+    Task<IEnumerable<string>> GetLanguagesAvaliebles(string tenant);
 }
