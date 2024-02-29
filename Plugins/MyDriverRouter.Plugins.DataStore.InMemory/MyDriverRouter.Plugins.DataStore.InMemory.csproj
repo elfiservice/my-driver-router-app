@@ -25,6 +25,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\MyDriverRouter.UseCases\MyDriverRouter.UseCases.csproj" />
+	  <ProjectReference Include="..\..\MyDriverRouter.CoreBusiness\MyDriverRouter.CoreBusiness.csproj" />
 	</ItemGroup>
 
 </Project>

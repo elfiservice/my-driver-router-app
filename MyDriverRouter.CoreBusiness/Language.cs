@@ -1,7 +1,10 @@
-﻿namespace MyDriverRouter.CoreBusiness;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-public class Language
+namespace MyDriverRouter.CoreBusiness;
+
+public partial class Language : ObservableObject
 {
+    [ObservableProperty]
     string description;
 
 }

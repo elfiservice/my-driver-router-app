@@ -1,4 +1,6 @@
-﻿namespace MyDriverRouter.UseCases;
+﻿using MyDriverRouter.CoreBusiness;
+
+namespace MyDriverRouter.UseCases;
 
 // All the code in this file is included in all platforms.
 public class ProvideTenantUseCase : IProvideTenantUseCase
@@ -10,7 +12,7 @@ public class ProvideTenantUseCase : IProvideTenantUseCase
         this.settingsRepository = settingsRepository;
     }
 
-    public async Task<IEnumerable<string>> ExecuteAsync(string tenant)
+    public async Task<IEnumerable<Language>> ExecuteAsync(string tenant)
     {
         await this.settingsRepository.SetTenant(tenant);
         return await this.settingsRepository.GetLanguagesAvaliebles(tenant);
