@@ -1,4 +1,5 @@
-﻿using MyDriverRouter.UseCases;
+﻿using MyDriverRouter.CoreBusiness;
+using MyDriverRouter.UseCases;
 
 namespace MyDriverRouter.Plugins.DataStore.InMemory;
 
@@ -13,7 +14,10 @@ public class I18nInMemoryRepository : Ii18nRepository
 
     public Task SetLanguage(string language)
     {
-        this._currentLanguage = language;
+        this._currentLanguage = new i18n {
+            CurrentLanguage = language
+        }.CurrentLanguage;
+
         return Task.CompletedTask;
     }
 }

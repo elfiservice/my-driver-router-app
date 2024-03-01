@@ -27,9 +27,18 @@ public class SettingsInMemoryRepository : ISettingsRepository
 
     public Task SetTenant(string tenant)
     {
-        _tenant = tenant;
         this.GetAllLanguagesAPI(tenant);
+        this.SetTenantInMemroy(tenant);
         return Task.CompletedTask;
+    }
+
+    private void SetTenantInMemroy(string tenant)
+    {
+        Settings settings = new Settings {
+            LastTenantProvided = tenant
+        };
+
+        _tenant = settings.LastTenantProvided;
     }
 
     private void GetAllLanguagesAPI(string tenant)
