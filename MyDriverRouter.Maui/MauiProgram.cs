@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using MyDriverRouter.Maui.Pages;
+using MyDriverRouter.Plugins.DataStore.InMemory;
+using MyDriverRouter.UseCases;
 
 namespace MyDriverRouter.Maui;
 
@@ -18,6 +21,15 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+
+		builder.Services.AddSingleton<Ii18nRepository, I18nInMemoryRepository>();
+		builder.Services.AddSingleton<ISettingsRepository, SettingsInMemoryRepository>();
+
+		builder.Services.AddSingleton<IProvideTenantUseCase, ProvideTenantUseCase>();
+		builder.Services.AddSingleton<ISelectLanguageUseCase, SelectLanguageUseCase>();
+
+		builder.Services.AddSingleton<SettingsPage>();
+
 
 		return builder.Build();
 	}
