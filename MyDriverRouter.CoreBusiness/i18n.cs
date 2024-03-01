@@ -6,4 +6,7 @@ public partial class i18n : ObservableObject
 {
     [ObservableProperty]
     Language[] avaliableLanguages;
+    
+    [ObservableProperty]
+    string currentLanguage;
 }
