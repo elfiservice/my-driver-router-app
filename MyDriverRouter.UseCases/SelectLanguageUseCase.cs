@@ -1,6 +1,6 @@
 ﻿namespace MyDriverRouter.UseCases;
 
-public class SelectLanguageUseCase
+public class SelectLanguageUseCase : ISelectLanguageUseCase
 {
     private readonly Ii18nRepository _i18nRepository;
 
