@@ -33,10 +33,13 @@ public class SettingsInMemoryRepository : ISettingsRepository
     }
 
     private void GetAllLanguagesAPI(string tenant)
-    {
-        _languages = new[] {
-                new Language { Description = "English" },
-                new Language { Description = "Portuguese" }
-            };
+    {   
+        i18n i18nFromAPI = new i18n();
+        i18nFromAPI.AvaliableLanguages = new[] {
+            new Language { Description = "English" },
+            new Language { Description = "Portuguese" }
+        };
+
+        _languages = i18nFromAPI.AvaliableLanguages;
     }
 }
