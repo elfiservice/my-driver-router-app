@@ -62,4 +62,9 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Plugins\MyDriverRouter.Plugins.DataStore.InMemory\MyDriverRouter.Plugins.DataStore.InMemory.csproj" />
+	  <ProjectReference Include="..\MyDriverRouter.UseCases\MyDriverRouter.UseCases.csproj" />
+	</ItemGroup>
+
 </Project>
