@@ -16,5 +16,8 @@
                 HorizontalOptions="Center" />
         </HorizontalStackLayout>
 
+        <Picker
+            Title="Select the language">
+        </Picker>
     </VerticalStackLayout>
 </ContentPage>
