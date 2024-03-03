@@ -19,5 +19,9 @@
         <Picker
             Title="Select the language">
         </Picker>
+
+        <Button 
+            Text="Save"
+            VerticalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>
