@@ -2,22 +2,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyDriverRouter.Maui.Pages.SettingsPage"
-             Title="SettingsPage">
+             Title="Settings Page">
     <VerticalStackLayout Spacing="10" Margin="20, 10, 0, 0" HorizontalOptions="Center">
 
         <HorizontalStackLayout>
             <Entry 
+                x:Name="tenantEntry"
                 Placeholder="Tenant"
                 VerticalOptions="Center"
-                WidthRequest="100" />
+                WidthRequest="100"
+                TextChanged="OnEntryTextChanged"
+                 />
             <Label 
                 Text=".greenmile"
                 VerticalOptions="Center"
                 HorizontalOptions="Center" />
         </HorizontalStackLayout>
 
-        <Picker
-            Title="Select the language">
+        <Picker x:Name="picker"
+            Title="Select the language"
+            ItemDisplayBinding="{Binding Description}" >
         </Picker>
 
         <Button 
