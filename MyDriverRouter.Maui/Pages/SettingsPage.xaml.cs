@@ -25,7 +25,7 @@ public partial class SettingsPage : ContentPage
 		string newTenantValue = tenantEntry.Text;
 		// DisplayAlert("Alert", $"You have been alerted {newTenantValue}, {newText}, {oldText}", "OK");
 		await this.provideTenantUseCase.ExecuteAsync(newTenantValue);
-		picker.ItemsSource = await this.viewLanguagesAvaliableUseCase.ExecuteAsync(newTenantValue) as Language[];
+		languagePicker.ItemsSource = await this.viewLanguagesAvaliableUseCase.ExecuteAsync(newTenantValue) as Language[];
 	}
 
 	async void OnPickerSelectedIndexChanged(object sender, EventArgs e)

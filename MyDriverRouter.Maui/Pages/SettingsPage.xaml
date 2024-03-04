@@ -19,7 +19,7 @@
                 HorizontalOptions="Center" />
         </HorizontalStackLayout>
 
-        <Picker x:Name="picker"
+        <Picker x:Name="languagePicker"
             Title="Select the language"
             ItemDisplayBinding="{Binding Description}"
             SelectedIndexChanged="OnPickerSelectedIndexChanged" >
