@@ -17,6 +17,7 @@ public class SettingsInMemoryRepository : ISettingsRepository
 
     public Task<IEnumerable<Language>> GetLanguagesAvaliebles(string tenant)
     {
+        this.GetAllLanguagesAPI(tenant);
         return Task.FromResult(_languages);
     }
 
@@ -27,7 +28,6 @@ public class SettingsInMemoryRepository : ISettingsRepository
 
     public Task SetTenant(string tenant)
     {
-        this.GetAllLanguagesAPI(tenant);
         this.SetTenantInMemroy(tenant);
         return Task.CompletedTask;
     }

@@ -27,6 +27,7 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<IProvideTenantUseCase, ProvideTenantUseCase>();
 		builder.Services.AddSingleton<ISelectLanguageUseCase, SelectLanguageUseCase>();
+		builder.Services.AddSingleton<IViewLanguagesAvaliableUseCase, ViewLanguagesAvaliableUseCase>();
 
 		builder.Services.AddSingleton<SettingsPage>();
 
