@@ -9,7 +9,7 @@ public class SelectLanguageUseCase : ISelectLanguageUseCase
         _i18nRepository = i18nRepository;
     }
 
-    public async Task SetLanguage(string language)
+    public async Task ExecuteAsync(string language)
     {
         await _i18nRepository.SetLanguage(language);
     }

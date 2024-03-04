@@ -2,5 +2,5 @@
 
 public interface ISelectLanguageUseCase
 {
-    Task SetLanguage(string language);
+    Task ExecuteAsync(string language);
 }
