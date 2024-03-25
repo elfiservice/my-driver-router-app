@@ -62,5 +62,11 @@ namespace MyDriverRouter.Maui.Resources.Languages {
                 return ResourceManager.GetString("SettingPage_Input_Placeholder_SelectTheLanguage", resourceCulture);
             }
         }
+        
+        internal static string SettingPage_Button_Save {
+            get {
+                return ResourceManager.GetString("SettingPage_Button_Save", resourceCulture);
+            }
+        }
     }
 }

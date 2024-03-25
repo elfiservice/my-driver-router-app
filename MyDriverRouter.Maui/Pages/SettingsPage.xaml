@@ -27,7 +27,7 @@
         </Picker>
 
         <Button 
-            Text="Save"
+            Text="{localization:Translate SettingPage_Button_Save}"
             VerticalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>

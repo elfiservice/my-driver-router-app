@@ -29,4 +29,7 @@
     <data name="SettingPage_Input_Placeholder_SelectTheLanguage" xml:space="preserve">
         <value>Select the language</value>
     </data>
+    <data name="SettingPage_Button_Save" xml:space="preserve">
+        <value>Save</value>
+    </data>
 </root>
