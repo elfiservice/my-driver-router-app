@@ -1,6 +1,6 @@
 ﻿using MyDriverRouter.CoreBusiness;
 
-namespace MyDriverRouter.UseCases;
+namespace MyDriverRouter.UseCases.PluginInterfaces;
 
 public interface ISettingsRepository
 {

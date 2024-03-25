@@ -1,5 +1,5 @@
 ﻿using MyDriverRouter.CoreBusiness;
-using MyDriverRouter.UseCases;
+using MyDriverRouter.UseCases.PluginInterfaces;
 
 namespace MyDriverRouter.Plugins.DataStore.InMemory;
 

@@ -1,4 +1,4 @@
-﻿namespace MyDriverRouter.UseCases;
+﻿namespace MyDriverRouter.UseCases.PluginInterfaces;
 
 public interface Ii18nRepository
 {
