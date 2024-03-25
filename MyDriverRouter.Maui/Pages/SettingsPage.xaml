@@ -2,13 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MyDriverRouter.Maui.Pages.SettingsPage"
-             Title="Settings Page">
+             xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+             Title="{localization:Translate SettingPage_Title}">
     <VerticalStackLayout Spacing="10" Margin="20, 10, 0, 0" HorizontalOptions="Center">
 
         <HorizontalStackLayout>
             <Entry 
                 x:Name="tenantEntry"
-                Placeholder="Tenant"
+                Placeholder="{localization:Translate SettingPage_Input_Placeholder_Server}"
                 VerticalOptions="Center"
                 WidthRequest="100"
                 TextChanged="OnEntryTextChanged"
@@ -20,7 +21,7 @@
         </HorizontalStackLayout>
 
         <Picker x:Name="languagePicker"
-            Title="Select the language"
+            Title="{localization:Translate SettingPage_Input_Placeholder_SelectTheLanguage}"
             ItemDisplayBinding="{Binding Description}"
             SelectedIndexChanged="OnPickerSelectedIndexChanged" >
         </Picker>
