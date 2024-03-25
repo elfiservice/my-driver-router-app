@@ -1,3 +1,4 @@
+using LocalizationResourceManager.Maui;
 using MyDriverRouter.CoreBusiness;
 using MyDriverRouter.UseCases;
 
@@ -8,16 +9,19 @@ public partial class SettingsPage : ContentPage
     private readonly IProvideTenantUseCase _provideTenantUseCase;
     private readonly IViewLanguagesAvaliableUseCase _viewLanguagesAvailableUseCase;
     private readonly ISelectLanguageUseCase _selectLanguageUseCase;
+    private readonly ILocalizationResourceManager _localizationResourceManager;
 
     public SettingsPage(
 		IProvideTenantUseCase provideTenantUseCase,
 		IViewLanguagesAvaliableUseCase viewLanguagesAvailableUseCase,
-		ISelectLanguageUseCase selectLanguageUseCase)
+		ISelectLanguageUseCase selectLanguageUseCase,
+		ILocalizationResourceManager localizationResourceManager)
 	{
 		InitializeComponent();
 		this._provideTenantUseCase = provideTenantUseCase;
 		this._viewLanguagesAvailableUseCase = viewLanguagesAvailableUseCase;
 		this._selectLanguageUseCase = selectLanguageUseCase;
+		this._localizationResourceManager = localizationResourceManager;
 	}
 
 	async void OnEntryTextChanged(object sender, TextChangedEventArgs e)
@@ -35,6 +39,10 @@ public partial class SettingsPage : ContentPage
 
 		if (selectedIndex != -1)
 		{
+			
+			var language = picker.SelectedItem as Language;
+			_localizationResourceManager.CurrentCulture = new System.Globalization.CultureInfo(language.Code);
+			
 			// monkeyNameLabel.Text = picker.Items[selectedIndex];
 			await DisplayAlert("Alert", $"Item selected: {selectedIndex}, {picker.Items[selectedIndex]}", "OK");
 			await this._selectLanguageUseCase.ExecuteAsync(picker.Items[selectedIndex]);

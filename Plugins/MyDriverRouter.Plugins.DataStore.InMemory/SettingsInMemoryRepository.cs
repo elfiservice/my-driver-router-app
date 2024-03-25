@@ -45,8 +45,8 @@ public class SettingsInMemoryRepository : ISettingsRepository
     {   
         i18n i18nFromAPI = new i18n();
         i18nFromAPI.AvaliableLanguages = new[] {
-            new Language { Description = "English" },
-            new Language { Description = "Portuguese" }
+            new Language { Description = "English", Code = "en"},
+            new Language { Description = "Portuguese", Code = "pt" }
         };
 
         _languages = i18nFromAPI.AvaliableLanguages;

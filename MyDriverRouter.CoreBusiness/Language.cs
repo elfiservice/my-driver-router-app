@@ -7,4 +7,7 @@ public partial class Language : ObservableObject
     [ObservableProperty]
     string description;
 
+    [ObservableProperty] 
+    string code;
+
 }
