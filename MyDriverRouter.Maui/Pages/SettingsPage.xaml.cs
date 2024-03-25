@@ -36,11 +36,10 @@ public partial class SettingsPage : ContentPage
 	{
 		var picker = (Picker)sender;
 		int selectedIndex = picker.SelectedIndex;
+		var language = picker.SelectedItem as Language;
 
-		if (selectedIndex != -1)
+		if (selectedIndex != -1 && language != null)
 		{
-			
-			var language = picker.SelectedItem as Language;
 			_localizationResourceManager.CurrentCulture = new System.Globalization.CultureInfo(language.Code);
 			
 			// monkeyNameLabel.Text = picker.Items[selectedIndex];
