@@ -5,27 +5,27 @@ namespace MyDriverRouter.Maui.Pages;
 
 public partial class SettingsPage : ContentPage
 {
-    private readonly IProvideTenantUseCase provideTenantUseCase;
-    private readonly IViewLanguagesAvaliableUseCase viewLanguagesAvaliableUseCase;
-    private readonly ISelectLanguageUseCase selectLanguageUseCase;
+    private readonly IProvideTenantUseCase _provideTenantUseCase;
+    private readonly IViewLanguagesAvaliableUseCase _viewLanguagesAvailableUseCase;
+    private readonly ISelectLanguageUseCase _selectLanguageUseCase;
 
     public SettingsPage(
 		IProvideTenantUseCase provideTenantUseCase,
-		IViewLanguagesAvaliableUseCase viewLanguagesAvaliableUseCase,
+		IViewLanguagesAvaliableUseCase viewLanguagesAvailableUseCase,
 		ISelectLanguageUseCase selectLanguageUseCase)
 	{
 		InitializeComponent();
-		this.provideTenantUseCase = provideTenantUseCase;
-		this.viewLanguagesAvaliableUseCase = viewLanguagesAvaliableUseCase;
-		this.selectLanguageUseCase = selectLanguageUseCase;
+		this._provideTenantUseCase = provideTenantUseCase;
+		this._viewLanguagesAvailableUseCase = viewLanguagesAvailableUseCase;
+		this._selectLanguageUseCase = selectLanguageUseCase;
 	}
 
 	async void OnEntryTextChanged(object sender, TextChangedEventArgs e)
 	{
 		string newTenantValue = tenantEntry.Text;
 		// DisplayAlert("Alert", $"You have been alerted {newTenantValue}, {newText}, {oldText}", "OK");
-		await this.provideTenantUseCase.ExecuteAsync(newTenantValue);
-		languagePicker.ItemsSource = await this.viewLanguagesAvaliableUseCase.ExecuteAsync(newTenantValue) as Language[];
+		await this._provideTenantUseCase.ExecuteAsync(newTenantValue);
+		languagePicker.ItemsSource = await this._viewLanguagesAvailableUseCase.ExecuteAsync(newTenantValue) as Language[];
 	}
 
 	async void OnPickerSelectedIndexChanged(object sender, EventArgs e)
@@ -37,7 +37,7 @@ public partial class SettingsPage : ContentPage
 		{
 			// monkeyNameLabel.Text = picker.Items[selectedIndex];
 			await DisplayAlert("Alert", $"Item selected: {selectedIndex}, {picker.Items[selectedIndex]}", "OK");
-			await this.selectLanguageUseCase.ExecuteAsync(picker.Items[selectedIndex]);
+			await this._selectLanguageUseCase.ExecuteAsync(picker.Items[selectedIndex]);
 		}
 	}
 }
