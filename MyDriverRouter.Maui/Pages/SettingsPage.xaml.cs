@@ -40,11 +40,12 @@ public partial class SettingsPage : ContentPage
 
 		if (selectedIndex != -1 && language != null)
 		{
-			_localizationResourceManager.CurrentCulture = new System.Globalization.CultureInfo(language.Code);
+			// _localizationResourceManager.CurrentCulture = new System.Globalization.CultureInfo(language.Code);
 			
 			// monkeyNameLabel.Text = picker.Items[selectedIndex];
 			await DisplayAlert("Alert", $"Item selected: {selectedIndex}, {picker.Items[selectedIndex]}", "OK");
-			await this._selectLanguageUseCase.ExecuteAsync(picker.Items[selectedIndex]);
+			// await this._selectLanguageUseCase.ExecuteAsync(picker.Items[selectedIndex]);
+			await this._selectLanguageUseCase.ExecuteAsync(language);
 		}
 	}
 }

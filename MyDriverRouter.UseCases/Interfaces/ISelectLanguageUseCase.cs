@@ -1,6 +1,8 @@
-﻿namespace MyDriverRouter.UseCases;
+﻿using MyDriverRouter.CoreBusiness;
+
+namespace MyDriverRouter.UseCases;
 
 public interface ISelectLanguageUseCase
 {
-    Task ExecuteAsync(string language);
+    Task ExecuteAsync(Language language);
 }
