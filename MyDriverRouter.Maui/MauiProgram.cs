@@ -16,16 +16,8 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
-			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			})
-			.UseLocalizationResourceManager(settings =>
-			{
-				settings.AddResource(AppResources.ResourceManager);
-				settings.RestoreLatestCulture(true);
-			})
+			.ConfigureFonts(AddFonts)
+			.UseLocalizationResourceManager(ConfigureResources)
 			.UseMauiCommunityToolkit()
 			.RegisterUseCases()
 			.RegisterPages()
@@ -38,7 +30,19 @@ public static class MauiProgram
 		
 		return builder.Build();
 	}
-	
+
+	private static void ConfigureResources(ILocalizationSettings settings)
+	{
+		settings.AddResource(AppResources.ResourceManager);
+		settings.RestoreLatestCulture(true);
+	}
+
+	private static void AddFonts(IFontCollection fonts)
+	{
+		fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+		fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+	}
+
 	static MauiAppBuilder RegisterPages(this MauiAppBuilder mauiAppBuilder)
 	{
 		mauiAppBuilder.Services.AddSingleton<SettingsPage>();
