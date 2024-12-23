@@ -1,4 +1,5 @@
-﻿using LocalizationResourceManager.Maui;
+﻿using CommunityToolkit.Maui;
+using LocalizationResourceManager.Maui;
 using Microsoft.Extensions.Logging;
 using MyDriverRouter.Maui.Pages;
 using MyDriverRouter.Maui.Resources.Languages;
@@ -24,7 +25,8 @@ public static class MauiProgram
 			{
 				settings.AddResource(AppResources.ResourceManager);
 				settings.RestoreLatestCulture(true);
-			});;
+			})
+			.UseMauiCommunityToolkit();
 
 #if DEBUG
 		builder.Logging.AddDebug();
