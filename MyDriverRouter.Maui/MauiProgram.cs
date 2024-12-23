@@ -26,22 +26,40 @@ public static class MauiProgram
 				settings.AddResource(AppResources.ResourceManager);
 				settings.RestoreLatestCulture(true);
 			})
-			.UseMauiCommunityToolkit();
+			.UseMauiCommunityToolkit()
+			.RegisterUseCases()
+			.RegisterPages()
+			.RegisterRepositories();
 
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-
-		builder.Services.AddSingleton<Ii18nRepository, I18nInMemoryRepository>();
-		builder.Services.AddSingleton<ISettingsRepository, SettingsInMemoryRepository>();
-
-		builder.Services.AddSingleton<IProvideTenantUseCase, ProvideTenantUseCase>();
-		builder.Services.AddSingleton<ISelectLanguageUseCase, SelectLanguageUseCase>();
-		builder.Services.AddSingleton<IViewLanguagesAvaliableUseCase, ViewLanguagesAvaliableUseCase>();
-
-		builder.Services.AddSingleton<SettingsPage>();
-
-
+		
+		
 		return builder.Build();
+	}
+	
+	static MauiAppBuilder RegisterPages(this MauiAppBuilder mauiAppBuilder)
+	{
+		mauiAppBuilder.Services.AddSingleton<SettingsPage>();
+		
+		return mauiAppBuilder;
+	}
+	
+	static MauiAppBuilder RegisterRepositories(this MauiAppBuilder mauiAppBuilder)
+	{
+		mauiAppBuilder.Services.AddSingleton<Ii18nRepository, I18nInMemoryRepository>();
+		mauiAppBuilder.Services.AddSingleton<ISettingsRepository, SettingsInMemoryRepository>();
+		
+		return mauiAppBuilder;
+	}
+
+	static MauiAppBuilder RegisterUseCases(this MauiAppBuilder mauiAppBuilder)
+	{
+		mauiAppBuilder.Services.AddSingleton<IProvideTenantUseCase, ProvideTenantUseCase>();
+		mauiAppBuilder.Services.AddSingleton<ISelectLanguageUseCase, SelectLanguageUseCase>();
+		mauiAppBuilder.Services.AddSingleton<IViewLanguagesAvaliableUseCase, ViewLanguagesAvaliableUseCase>();
+		
+		return mauiAppBuilder;
 	}
 }
