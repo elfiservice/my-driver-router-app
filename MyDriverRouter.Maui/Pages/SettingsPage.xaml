@@ -1,29 +1,43 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage 
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="MyDriverRouter.Maui.Pages.SettingsPage"
              xmlns:localization="clr-namespace:LocalizationResourceManager.Maui;assembly=LocalizationResourceManager.Maui"
+             xmlns:pages="clr-namespace:MyDriverRouter.Maui.Pages"
+             xmlns:core="clr-namespace:MyDriverRouter.CoreBusiness;assembly=MyDriverRouter.CoreBusiness"
+             xmlns:viewmodel="clr-namespace:MyDriverRouter.Maui.ViewModels"
+             x:DataType="viewmodel:SettingsPageViewModel"
              Title="{localization:Translate SettingPage_Title}">
+    
     <VerticalStackLayout Spacing="10" Margin="20, 10, 0, 0" HorizontalOptions="Center">
 
         <HorizontalStackLayout>
             <Entry 
-                x:Name="tenantEntry"
+                x:Name="TenantEntry"
                 Placeholder="{localization:Translate SettingPage_Input_Placeholder_Server}"
                 VerticalOptions="Center"
                 WidthRequest="100"
-                TextChanged="OnEntryTextChanged"
-                 />
+                Text="{Binding Tenant, Mode=TwoWay}"
+                 >
+                <Entry.Behaviors>
+                    <toolkit:EventToCommandBehavior EventName="TextChanged" 
+                                                    Command="{Binding EntryTextChangedCommand}" />
+                </Entry.Behaviors>
+            </Entry>
             <Label 
                 Text=".greenmile"
                 VerticalOptions="Center"
                 HorizontalOptions="Center" />
         </HorizontalStackLayout>
 
-        <Picker x:Name="languagePicker"
-            Title="{localization:Translate SettingPage_Input_Placeholder_SelectTheLanguage}"
-            ItemDisplayBinding="{Binding Description}"
-            SelectedIndexChanged="OnPickerSelectedIndexChanged" >
+        <Picker x:Name="LanguagePicker"
+                SelectedItem="{Binding SelectedLanguage}"
+                Title="{localization:Translate SettingPage_Input_Placeholder_SelectTheLanguage}"
+                ItemDisplayBinding="{Binding  Description}"
+                ItemsSource="{Binding Languages}"
+                SelectedIndexChanged="OnPickerSelectedIndexChanged">
         </Picker>
 
         <Button 

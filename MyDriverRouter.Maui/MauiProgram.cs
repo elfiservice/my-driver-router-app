@@ -3,6 +3,7 @@ using LocalizationResourceManager.Maui;
 using Microsoft.Extensions.Logging;
 using MyDriverRouter.Maui.Pages;
 using MyDriverRouter.Maui.Resources.Languages;
+using MyDriverRouter.Maui.ViewModels;
 using MyDriverRouter.Plugins.DataStore.InMemory;
 using MyDriverRouter.UseCases;
 using MyDriverRouter.UseCases.PluginInterfaces;
@@ -19,6 +20,7 @@ public static class MauiProgram
 			.ConfigureFonts(AddFonts)
 			.UseLocalizationResourceManager(ConfigureResources)
 			.UseMauiCommunityToolkit()
+			.RegisterViewModels()
 			.RegisterUseCases()
 			.RegisterPages()
 			.RegisterRepositories();
@@ -64,6 +66,12 @@ public static class MauiProgram
 		mauiAppBuilder.Services.AddSingleton<ISelectLanguageUseCase, SelectLanguageUseCase>();
 		mauiAppBuilder.Services.AddSingleton<IViewLanguagesAvaliableUseCase, ViewLanguagesAvaliableUseCase>();
 		
+		return mauiAppBuilder;
+	}
+	
+	static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
+	{
+		mauiAppBuilder.Services.AddTransient<SettingsPageViewModel>();
 		return mauiAppBuilder;
 	}
 }
