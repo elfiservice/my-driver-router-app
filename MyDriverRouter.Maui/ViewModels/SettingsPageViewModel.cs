@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LocalizationResourceManager.Maui;
@@ -15,7 +14,7 @@ public partial class SettingsPageViewModel : BaseViewModel
     private readonly ILocalizationResourceManager _localizationResourceManager;
     
     [ObservableProperty]
-    Language _selectedLanguage;
+    Language? _selectedLanguage;
     
     [ObservableProperty]
     List<Language>? _languages = new();
@@ -38,20 +37,23 @@ public partial class SettingsPageViewModel : BaseViewModel
     public async Task OnEntryTextChanged(string newTenantValue)
     {
         await this._provideTenantUseCase.ExecuteAsync(Tenant);
-        var langs = await _viewLanguagesAvailableUseCase.ExecuteAsync(Tenant);
-        if (langs != null)
+        var languages = await _viewLanguagesAvailableUseCase.ExecuteAsync(Tenant);
+        var languagesNormalized = languages as Language[] ?? languages.ToArray();
+        
+        if (languagesNormalized.Any())
         {
-            Languages = new List<Language>(langs);
+            Languages = new List<Language>(languagesNormalized);
         }
     }
     
-    public async Task OnPickerSelectedIndexChanged(int selectedIndex, Language language)
+    [RelayCommand]
+    async Task OptionItemClicked()
     {
-        if (selectedIndex != -1 && language != null)
-        {
-            await Shell.Current.DisplayAlert("Alert", $"Item selected: {selectedIndex}, {language.Description}", "OK");
-            
-            await this._selectLanguageUseCase.ExecuteAsync(language);
-        }
+        var language = SelectedLanguage;
+        
+        if (language is null) return;
+        
+        await Shell.Current.DisplayAlert("Alert", $"Item selected from Gesture: {language.Description}", "OK");
+        await _selectLanguageUseCase.ExecuteAsync(language);
     }
 }

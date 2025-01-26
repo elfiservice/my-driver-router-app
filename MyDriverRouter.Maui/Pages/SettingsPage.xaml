@@ -36,8 +36,12 @@
                 SelectedItem="{Binding SelectedLanguage}"
                 Title="{localization:Translate SettingPage_Input_Placeholder_SelectTheLanguage}"
                 ItemDisplayBinding="{Binding  Description}"
-                ItemsSource="{Binding Languages}"
-                SelectedIndexChanged="OnPickerSelectedIndexChanged">
+                ItemsSource="{Binding Languages}">
+            
+            <Picker.Behaviors>
+                <toolkit:EventToCommandBehavior EventName="SelectedIndexChanged" 
+                                                Command="{Binding OptionItemClickedCommand}" />
+            </Picker.Behaviors>
         </Picker>
 
         <Button 
