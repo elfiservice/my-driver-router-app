@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:controls="clr-namespace:MyDriverRouter.Maui.Controls"
+             x:Class="MyDriverRouter.Maui.Controls.DropDown"
+             x:Name="This"
+             x:DataType="controls:DropDown">
+    
+    <VerticalStackLayout
+        BindingContext="{x:Reference This}"
+        IsEnabled="{Binding IsDropDownEnabled}"
+    >
+        <Label Text="{Binding LabelText}"
+               FontSize="14"
+               FontAttributes="Bold"
+               TextColor="{StaticResource Black}"
+               Margin="0, 0, 0, 5" />
+        <toolkit:Expander ExpandedChanged="Expander_ExpandedChanged" x:Name="ExpanderBox" >
+            <toolkit:Expander.Header>
+                <Frame
+                    Padding="10"
+                    CornerRadius="5"
+                    BackgroundColor="White"
+                    x:Name="HeaderDropDown">
+                    <Grid>
+                        <Label Text="{Binding Placeholder}" HorizontalOptions="StartAndExpand" />
+                        <Image x:Name="HeaderIcon" WidthRequest="20" Source="arrow_down" HorizontalOptions="EndAndExpand" />
+                    </Grid>
+                </Frame>
+            </toolkit:Expander.Header>
+            <toolkit:Expander.Content>
+                <Frame
+                    Padding="3"
+                    CornerRadius="5"
+                    Margin="0,0,0,0"
+                    BackgroundColor="White"
+                    BorderColor="{StaticResource Primary}">
+                    <VerticalStackLayout Spacing="5">
+                        <CollectionView
+                            x:Name="ListItems"
+                            BackgroundColor="Transparent"
+                            ItemsSource="{Binding ItemsSource}"
+                            MaximumHeightRequest="100"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedItem}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="controls:DropDownItemDto">
+                                    <Grid Padding="10">
+                                        <Label
+                                            Text="{Binding  Description}"
+                                            TextColor="Black">
+                                        </Label>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
+            </toolkit:Expander.Content>
+        </toolkit:Expander>
+    </VerticalStackLayout>
+</ContentView>
