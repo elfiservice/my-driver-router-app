@@ -8,6 +8,7 @@
              xmlns:pages="clr-namespace:MyDriverRouter.Maui.Pages"
              xmlns:core="clr-namespace:MyDriverRouter.CoreBusiness;assembly=MyDriverRouter.CoreBusiness"
              xmlns:viewmodel="clr-namespace:MyDriverRouter.Maui.ViewModels"
+             xmlns:controls="clr-namespace:MyDriverRouter.Maui.Controls"
              x:DataType="viewmodel:SettingsPageViewModel"
              Title="{localization:Translate SettingPage_Title}">
     
@@ -43,6 +44,16 @@
                                                 Command="{Binding OptionItemClickedCommand}" />
             </Picker.Behaviors>
         </Picker>
+        
+        <controls:DropDown
+            LabelText="Application Language"
+            BorderColor="{StaticResource Primary}"
+            ItemsSource="{Binding LanguagesNewDropDown}"
+            SelectedValueChangeCommand="{Binding DropDownItemClickedCommand}"
+            SelectedItem="{Binding SelectedLanguageDropDown}"
+            IsDropDownEnabled="True"
+            Placeholder="Select Language"
+        />
 
         <Button 
             Text="{localization:Translate SettingPage_Button_Save}"

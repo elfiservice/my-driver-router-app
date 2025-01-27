@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LocalizationResourceManager.Maui;
 using MyDriverRouter.CoreBusiness;
+using MyDriverRouter.Maui.Controls;
 using MyDriverRouter.UseCases;
 
 namespace MyDriverRouter.Maui.ViewModels;
@@ -17,7 +18,13 @@ public partial class SettingsPageViewModel : BaseViewModel
     Language? _selectedLanguage;
     
     [ObservableProperty]
+    DropDownItemDto? _selectedLanguageDropDown;
+    
+    [ObservableProperty]
     List<Language>? _languages = new();
+    
+    [ObservableProperty]
+    List<DropDownItemDto>? _languagesNewDropDown = new();
 
     [ObservableProperty] string _tenant = "";
 
@@ -43,6 +50,14 @@ public partial class SettingsPageViewModel : BaseViewModel
         if (languagesNormalized.Any())
         {
             Languages = new List<Language>(languagesNormalized);
+
+            LanguagesNewDropDown = new List<DropDownItemDto>(
+                Languages.Select(language => new DropDownItemDto
+                {
+                    Description = language.Description,
+                    Key = language.Code
+                }));
+
         }
     }
     
@@ -55,5 +70,23 @@ public partial class SettingsPageViewModel : BaseViewModel
         
         await Shell.Current.DisplayAlert("Alert", $"Item selected from Gesture: {language.Description}", "OK");
         await _selectLanguageUseCase.ExecuteAsync(language);
+    }
+    
+    [RelayCommand]
+    async Task DropDownItemClicked()
+    {
+        var language = SelectedLanguageDropDown;
+        
+        if (language is null) return;
+        
+        await Shell.Current.DisplayAlert("Alert", $"Item selected from Gesture: {language.Description}", "OK");
+
+        var dropDowntoLanguage = new Language
+        {
+            Description = language.Description,
+            Code = language.Key
+        };
+        
+        await _selectLanguageUseCase.ExecuteAsync(dropDowntoLanguage);
     }
 }
