@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using LocalizationResourceManager.Maui;
+using Microsoft.Extensions.Logging;
 using MyDriverRouter.CoreBusiness;
 using MyDriverRouter.Maui.Controls;
 using MyDriverRouter.UseCases;
@@ -12,7 +12,6 @@ public partial class SettingsPageViewModel : BaseViewModel
     private readonly IProvideTenantUseCase _provideTenantUseCase;
     private readonly IViewLanguagesAvaliableUseCase _viewLanguagesAvailableUseCase;
     private readonly ISelectLanguageUseCase _selectLanguageUseCase;
-    private readonly ILocalizationResourceManager _localizationResourceManager;
     
     [ObservableProperty]
     Language? _selectedLanguage;
@@ -29,20 +28,22 @@ public partial class SettingsPageViewModel : BaseViewModel
     [ObservableProperty] string _tenant = "";
 
     public SettingsPageViewModel(
+        BaseViewModelCtorParameters baseCtorParams,
         IProvideTenantUseCase provideTenantUseCase,
         IViewLanguagesAvaliableUseCase viewLanguagesAvailableUseCase,
-        ISelectLanguageUseCase selectLanguageUseCase,
-        ILocalizationResourceManager localizationResourceManager)
+        ISelectLanguageUseCase selectLanguageUseCase)
+    : base(baseCtorParams)
     {
         this._provideTenantUseCase = provideTenantUseCase;
         this._viewLanguagesAvailableUseCase = viewLanguagesAvailableUseCase;
         this._selectLanguageUseCase = selectLanguageUseCase;
-        this._localizationResourceManager = localizationResourceManager;
     }
 
     [RelayCommand]
     public async Task OnEntryTextChanged(string newTenantValue)
     {
+        LoggerBase.LogInformation("Tenant value changed to {newTenantValue}", newTenantValue);
+        
         await this._provideTenantUseCase.ExecuteAsync(Tenant);
         var languages = await _viewLanguagesAvailableUseCase.ExecuteAsync(Tenant);
         var languagesNormalized = languages as Language[] ?? languages.ToArray();
@@ -68,7 +69,7 @@ public partial class SettingsPageViewModel : BaseViewModel
         
         if (language is null) return;
         
-        await Shell.Current.DisplayAlert("Alert", $"Item selected from Gesture: {language.Description}", "OK");
+        await AlertUserFacadeBase.ShowAsync("Alert", $"Item selected from Gesture: {language.Description}", "OK");
         await _selectLanguageUseCase.ExecuteAsync(language);
     }
     
@@ -79,7 +80,7 @@ public partial class SettingsPageViewModel : BaseViewModel
         
         if (language is null) return;
         
-        await Shell.Current.DisplayAlert("Alert", $"Item selected from Gesture: {language.Description}", "OK");
+       await AlertUserFacadeBase.ShowAsync($"Item selected from Gesture: {language.Description}", "Alert");
 
         var dropDowntoLanguage = new Language
         {
