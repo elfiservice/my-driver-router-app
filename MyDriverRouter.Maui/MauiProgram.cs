@@ -1,10 +1,12 @@
 ﻿using CommunityToolkit.Maui;
 using LocalizationResourceManager.Maui;
 using Microsoft.Extensions.Logging;
-using MyDriverRouter.Maui.Facades;
-using MyDriverRouter.Maui.Facades.Interfaces;
 using MyDriverRouter.Maui.Pages;
+using MyDriverRouter.Maui.Providers;
+using MyDriverRouter.Maui.Providers.Interfaces;
 using MyDriverRouter.Maui.Resources.Languages;
+using MyDriverRouter.Maui.Services;
+using MyDriverRouter.Maui.Services.Interfaces;
 using MyDriverRouter.Maui.ViewModels;
 using MyDriverRouter.Plugins.DataStore.InMemory;
 using MyDriverRouter.UseCases;
@@ -26,7 +28,8 @@ public static class MauiProgram
 			.RegisterUseCases()
 			.RegisterPages()
 			.RegisterRepositories()
-			.RegisterServices();
+			.RegisterServices()
+			.RegisterProviders();
 
 #if DEBUG
 		builder.Logging.AddDebug();
@@ -81,7 +84,14 @@ public static class MauiProgram
 	
 	static MauiAppBuilder RegisterServices(this MauiAppBuilder mauiAppBuilder)
 	{
-		mauiAppBuilder.Services.AddSingleton<IAlertUserFacade, AlertUserFacade>();
+		mauiAppBuilder.Services.AddSingleton<IAlertUserService, AlertUserService>();
+
+		return mauiAppBuilder;
+	}
+	
+	static MauiAppBuilder RegisterProviders(this MauiAppBuilder mauiAppBuilder)
+	{
+		mauiAppBuilder.Services.AddSingleton<ICurrentShellProvider, CurrentShellProvider>();
 
 		return mauiAppBuilder;
 	}
