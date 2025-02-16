@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Maui;
 using LocalizationResourceManager.Maui;
 using Microsoft.Extensions.Logging;
+using MyDriverRouter.Maui.Facades;
+using MyDriverRouter.Maui.Facades.Interfaces;
 using MyDriverRouter.Maui.Pages;
 using MyDriverRouter.Maui.Resources.Languages;
 using MyDriverRouter.Maui.ViewModels;
@@ -23,7 +25,8 @@ public static class MauiProgram
 			.RegisterViewModels()
 			.RegisterUseCases()
 			.RegisterPages()
-			.RegisterRepositories();
+			.RegisterRepositories()
+			.RegisterServices();
 
 #if DEBUG
 		builder.Logging.AddDebug();
@@ -71,7 +74,15 @@ public static class MauiProgram
 	
 	static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
 	{
+		mauiAppBuilder.Services.AddSingleton<BaseViewModelCtorParameters>();
 		mauiAppBuilder.Services.AddTransient<SettingsPageViewModel>();
+		return mauiAppBuilder;
+	}
+	
+	static MauiAppBuilder RegisterServices(this MauiAppBuilder mauiAppBuilder)
+	{
+		mauiAppBuilder.Services.AddSingleton<IAlertUserFacade, AlertUserFacade>();
+
 		return mauiAppBuilder;
 	}
 }
