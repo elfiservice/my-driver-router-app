@@ -1,11 +1,16 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using LocalizationResourceManager.Maui;
 using Microsoft.Extensions.Logging;
+using MyDriverRouter.Maui.Facades.Interfaces;
 
 namespace MyDriverRouter.Maui.ViewModels;
 
 public partial class BaseViewModel : ObservableObject
 {
     protected ILogger? _logger;
+    public ILogger LoggerBase { get; set; }
+    public ILocalizationResourceManager LocalizationResourceManagerBase { get; set; }
+    public IAlertUserFacade AlertUserFacadeBase { get; set; }
 
     [ObservableProperty]
     string? _titlePage;
@@ -16,13 +21,22 @@ public partial class BaseViewModel : ObservableObject
 
     public bool IsNotBusy => !IsBusy;
 
-    protected BaseViewModel(ILogger? logger = null)
+    protected BaseViewModel(
+        BaseViewModelCtorParameters baseCtorParams,
+        ILogger? logger = null)
     {
         _logger = logger;
+
+        LoggerBase = baseCtorParams.LoggerFactory.CreateLogger(this.GetType());
+        LocalizationResourceManagerBase = baseCtorParams.LocalizationResourceManager;
+        AlertUserFacadeBase = baseCtorParams.AlertUserFacade;
     }
 }
 
-public abstract class BaseParameterViewModel<T> : BaseViewModel, IQueryAttributable
+public abstract class BaseParameterViewModel<T>(
+    BaseViewModelCtorParameters baseCtorParams,
+    ILogger? logger = null) 
+        : BaseViewModel(baseCtorParams, logger), IQueryAttributable
     where T : class, new()
 {
     private T Parameters { get; set; } = new();
