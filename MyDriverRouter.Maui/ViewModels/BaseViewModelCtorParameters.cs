@@ -1,16 +1,16 @@
 using LocalizationResourceManager.Maui;
 using Microsoft.Extensions.Logging;
-using MyDriverRouter.Maui.Facades.Interfaces;
+using MyDriverRouter.Maui.Services.Interfaces;
 
 namespace MyDriverRouter.Maui.ViewModels;
 
 public class BaseViewModelCtorParameters(
     ILoggerFactory loggerFactory,
     ILocalizationResourceManager localizationResourceManager,
-    IAlertUserFacade alertUserFacade
+    IAlertUserService alertUserService
 )
 {
     public readonly ILoggerFactory LoggerFactory = loggerFactory;
     public readonly ILocalizationResourceManager LocalizationResourceManager = localizationResourceManager;
-    public readonly IAlertUserFacade AlertUserFacade = alertUserFacade;
+    public readonly IAlertUserService AlertUserService = alertUserService;
 }

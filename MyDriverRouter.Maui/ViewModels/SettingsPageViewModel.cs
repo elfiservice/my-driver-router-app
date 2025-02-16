@@ -69,7 +69,7 @@ public partial class SettingsPageViewModel : BaseViewModel
         
         if (language is null) return;
         
-        await AlertUserFacadeBase.ShowAsync("Alert", $"Item selected from Gesture: {language.Description}", "OK");
+        await AlertUserServiceBase.ShowAsync( $"Item selected from Gesture: {language.Description}", "Alert");
         await _selectLanguageUseCase.ExecuteAsync(language);
     }
     
@@ -80,7 +80,7 @@ public partial class SettingsPageViewModel : BaseViewModel
         
         if (language is null) return;
         
-       await AlertUserFacadeBase.ShowAsync($"Item selected from Gesture: {language.Description}", "Alert");
+       await AlertUserServiceBase.ShowAsync($"Item selected from Gesture: {language.Description}", "Alert");
 
         var dropDowntoLanguage = new Language
         {

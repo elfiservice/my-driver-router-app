@@ -1,7 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using LocalizationResourceManager.Maui;
 using Microsoft.Extensions.Logging;
-using MyDriverRouter.Maui.Facades.Interfaces;
+using MyDriverRouter.Maui.Services.Interfaces;
 
 namespace MyDriverRouter.Maui.ViewModels;
 
@@ -10,7 +10,7 @@ public partial class BaseViewModel : ObservableObject
     protected ILogger? _logger;
     public ILogger LoggerBase { get; set; }
     public ILocalizationResourceManager LocalizationResourceManagerBase { get; set; }
-    public IAlertUserFacade AlertUserFacadeBase { get; set; }
+    public IAlertUserService AlertUserServiceBase { get; set; }
 
     [ObservableProperty]
     string? _titlePage;
@@ -29,7 +29,7 @@ public partial class BaseViewModel : ObservableObject
 
         LoggerBase = baseCtorParams.LoggerFactory.CreateLogger(this.GetType());
         LocalizationResourceManagerBase = baseCtorParams.LocalizationResourceManager;
-        AlertUserFacadeBase = baseCtorParams.AlertUserFacade;
+        AlertUserServiceBase = baseCtorParams.AlertUserService;
     }
 }
 
